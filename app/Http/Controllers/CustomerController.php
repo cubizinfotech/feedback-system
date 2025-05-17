@@ -15,6 +15,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        // $customer = Customer::first();
+        // return view('emails.feedback-request', compact('customer'));
         return view('customers.index');
     }
 

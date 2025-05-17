@@ -44,8 +44,7 @@ class FeedbackRequest extends Mailable
         return new Content(
             view: 'emails.feedback-request',
             with: [
-                'customer' => $this->customer,
-                'feedbackUrl' => route('feedback.form', ['token' => $this->token])
+                'customer' => $this->customer
             ],
         );
     }

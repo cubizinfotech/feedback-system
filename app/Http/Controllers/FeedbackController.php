@@ -61,15 +61,15 @@ class FeedbackController extends Controller
             abort(404);
         }
         
-        if ($rating > 3) {
-            return redirect($url);
-        }
-
         $feedback = Feedback::firstOrCreate([
             'customer_id' => $customerId,
             'rating' => $rating,
             'feedback_message' => ''
         ]);
+
+        if ($rating > 3) {
+            return redirect($url);
+        }
 
         return view('feedbacks.form', compact('customerId', 'rating', 'url'));
     }
