@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use App\Mail\CustomerFeedbackNotification;
 
 class FeedbackController extends Controller
 {
@@ -94,7 +96,13 @@ class FeedbackController extends Controller
             ]
         );
 
-        $suppportEmail = env('SUPPORT_EMAIL', 'support@c2crestore.com');
+        // $supportEmail = 'gopalhingu123@gmail.com';
+        $supportEmail = env('SUPPORT_EMAIL', 'support@c2crestore.com');
+
+        $customer = Customer::find($request->customer_id);
+
+        // Send notification to support
+        Mail::to($supportEmail)->send(new CustomerFeedbackNotification($customer, $feedback));
 
         return response()->json([
             'message' => 'Thank you for your feedback!',
