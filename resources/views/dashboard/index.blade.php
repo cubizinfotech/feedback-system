@@ -48,9 +48,9 @@
                 @forelse($recentFeedbacks as $feedback)
                 <div class="mb-3 pb-2 border-bottom">
                     <h6 class="mb-1">{{ $feedback->customer->name }}</h6>
-                    <div class="text-warning mb-1">
+                    <div class="mb-1">
                         @for($i = 1; $i <= 5; $i++)
-                            <i class="fas fa-star{{ $i <= $feedback->rating ? '' : '-o' }}"></i>
+                            <i class="fas fa-star{{ $i <= $feedback->rating ? ' text-warning' : ' text-secondary' }}"></i>
                         @endfor
                     </div>
                     <p class="mb-1 small">{{ Str::limit($feedback->feedback_message, 100) }}</p>
@@ -68,6 +68,20 @@
 @push('scripts')
 <script>
     var ratingData = @json($ratingDistribution);
+    var barColors = [
+        'rgba(255, 99, 132, 0.7)',   // Red
+        'rgba(255, 159, 64, 0.7)',   // Orange
+        'rgba(255, 205, 86, 0.7)',   // Yellow
+        'rgba(75, 192, 192, 0.7)',   // Teal
+        'rgba(54, 162, 235, 0.7)'    // Blue
+    ];
+    var borderColors = [
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(255, 205, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(54, 162, 235, 1)'
+    ];
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -81,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
             datasets: [{
                 label: 'Number of Feedbacks',
                 data: ratingData.map(item => item.count),
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: barColors.slice(0, ratingData.length),
+                borderColor: borderColors.slice(0, ratingData.length),
                 borderWidth: 1
             }]
         },
