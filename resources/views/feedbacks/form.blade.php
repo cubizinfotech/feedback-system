@@ -30,7 +30,7 @@
             margin-bottom: 1.5rem;
         }
         .main_wrapper .logo img {
-            max-width: 260px;
+            max-width: 150px;
         }
         .main_wrapper h2 {
             font-weight: 700;

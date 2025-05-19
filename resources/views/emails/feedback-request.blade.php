@@ -43,7 +43,7 @@
         margin-bottom: 1.5rem;
       }
       .logo img {
-        max-width: 260px;
+        max-width: 150px;
       }
       h2 {
         font-weight: 700;
